@@ -7,18 +7,18 @@
         <body>
             <h1>Question list</h1>
             <form action="/question" method="GET">
-                <input id="ask_question" type="submit" value="Ask Question" class="button" href="/question">
+                <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/question">
             </form>
             <table border="1">
                 <tr>
-                    {% for A in B %}
+                    {% for item in table_headers %}
                         <td>{{ item }}</td>
                     {% endfor %}
                 </tr>
-                {% for X in Y %}
+                {% for row in questions %}
                     <tr>
-                        {% for Z in X %}
-                            <td>{{ Z }}</td>
+                        {% for question in row %}
+                            <td>{{ question }}</td>
                         {% endfor %}
                             <td align="middle">
                                 <form action="/question/{{ row[0] }}" method="POST">
