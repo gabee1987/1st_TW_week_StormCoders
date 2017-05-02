@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+    <html>
+        <head>
+            <title>Ask Mate v1.0-Alpha</title>
+        </head>
+        <body>
+            <h1>Question list</h1>
+            <form action="/question" method="GET">
+                <input id="ask_question" type="submit" value="Ask Question" class="button" href="/question">
+            </form>
+            <table border="1">
+                <tr>
+                    {% for A in B %}
+                        <td>{{ item }}</td>
+                    {% endfor %}
+                </tr>
+                {% for X in Y %}
+                    <tr>
+                        {% for Z in X %}
+                            <td>{{ Z }}</td>
+                        {% endfor %}
+                            <td align="middle">
+                                <form action="/question/{{ row[0] }}" method="POST">
+                                    <input id="edit_button" name="edit_button" type="image" alt="submit" value="{{ row[0] }}" width="30" src="/static/edit.png">
+                                </form>
+                            </td>
+                            <td align="middle">
+                                <form action="/question_delete" method="POST">
+                                    <input id="delete_button" name="delete_button" type="image" alt="submit" value="{{ row[0] }}" width="30" src="/static/delete.png">
+                                </form>
+                            </td>
+                {% endfor %}
+                    </tr>
+            </table>
+        </body>
+    </html>
