@@ -11,7 +11,7 @@ import random
 def ID_generator(table):
     """
         Generates an ID for the questions and answers.
-        The id is unique in the database.
+        The ID is unique in the database.
     """
     generated = table[0][0]
     char_list = [
@@ -40,14 +40,15 @@ def open_question_file(filepath):
     with open(filepath, 'r') as workfile:
         row = workfile.readlines()
         row["0"] = int(row["0"])
-        for 
-        table = [item.replace("\n", "").split(';') for item in row]
+        for field in decode:
+            row[4][5] = base64.b64decode(row[field]).decode()
+        table = [item.strip("\n").split(';') for item in row]
         return table
 
 
 def open_answer_file(filepath):
     """
-        Opens the question.csv file,
+        Opens the answer.csv file,
         reads it content as rows.
     """
     filepath = ANSWERS_FILE
@@ -56,21 +57,20 @@ def open_answer_file(filepath):
     with open(filepath, 'r') as workfile:
         row = workfile.readlines()
         row["0"] = int(row["0"])
-        for field in decode:
-            
-        table = [item.replace("\n", "").split(';') for item in row]
+        row[4][5] = base64.b64decode(row[field]).decode()
+        table = [item.strip("\n").split(';') for item in row]
         return table
 
 
 def write_question_to_file(table, filepath):
     """
-        Saves data to the specified file.
+        Saves question to the specified file.
         Write the data as rows.
     """
     filepath = QUESTION_FILE
 
     with open(answers, 'w') as workfile:
-        for item in stories:
+        for item in table:
             story = [element.strip("\n") for element in item]
             row = ';'.join(story)
             workfile.write(row + "\n")
@@ -78,13 +78,13 @@ def write_question_to_file(table, filepath):
 
 def write_answer_to_file(table, filepath):
     """
-        Saves data to the specified file.
+        Saves answer to the specified file.
         Write the data as rows.
     """
     filepath = ANSWER_FILE
 
     with open(answers, 'w') as workfile:
-        for item in stories:
+        for item in table:
             story = [element.strip("\n") for element in item]
             row = ';'.join(story)
             workfile.write(row + "\n")
