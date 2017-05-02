@@ -35,10 +35,12 @@ def open_question_file(filepath):
         reads it content as rows.
     """
     filepath = QUESTION_FILE
+    decode = ENCODE_QUESTION_FIELDS
 
     with open(filepath, 'r') as workfile:
         row = workfile.readlines()
         row["0"] = int(row["0"])
+        for 
         table = [item.replace("\n", "").split(';') for item in row]
         return table
 
@@ -49,10 +51,13 @@ def open_answer_file(filepath):
         reads it content as rows.
     """
     filepath = ANSWERS_FILE
+    decode = ENCODE_ANSWER_FIELDS
 
     with open(filepath, 'r') as workfile:
         row = workfile.readlines()
         row["0"] = int(row["0"])
+        for field in decode:
+            
         table = [item.replace("\n", "").split(';') for item in row]
         return table
 
