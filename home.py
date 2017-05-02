@@ -3,7 +3,6 @@ import csv
 from common import *
 
 
-@app.route("/list", methods=["POST", "GET"])
 @app.route("/", methods=["POST", "GET"])
 def home_list_handler():
     questions = open_file()
