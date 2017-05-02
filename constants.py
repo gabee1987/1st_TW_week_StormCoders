@@ -23,6 +23,17 @@ ANSWER_FIELDS = (
     "image"
 )
 
+ENCODE_QUESTION_FIELDS = (
+    "title",
+    "message",
+    "image"
+)
+
+ENCODE_ANSWER_FIELDS = (
+    "message",
+    "image"
+)
+
 
 
 

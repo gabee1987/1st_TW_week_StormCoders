@@ -34,13 +34,18 @@ def open_file(answers=False):
         Opens the specified file and
         reads its content as rows, return a list.
     """
-    try:
-        with open(answers, 'r') as workfile:
-            row = workfile.readlines()
-            table = [item.replace("\n", "").split(';') for item in row]
-            return table
-    except FileNotFoundError:
-        table = None
+    if answers:
+        filepath = ANSWERS_FILE
+        fields = ANSWERS_FIELD
+        decode = ENCODE_ANSWER_FIELDS
+    else:
+        filepath = QUESTION_FILE
+        fields = QUESTION_FIELD
+        decode = QUESTION_ANSWER_FIELDS
+    with open(answers, 'r') as workfile:
+        row = workfile.readlines()
+        table = [item.replace("\n", "").split(';') for item in row]
+        return table
 
 
 def write_to_file(table, answers=False):
