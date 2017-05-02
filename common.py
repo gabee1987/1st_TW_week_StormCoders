@@ -29,26 +29,26 @@ def ID_generator(table):
     return "".join(generated)
 
 
-def open_file(filename="question.csv"):
+def open_file(answers=False):
     """
         Opens the specified file and
         reads its content as rows, return a list.
     """
     try:
-        with open(filename, 'r') as workfile:
+        with open(answers, 'r') as workfile:
             row = workfile.readlines()
-            stories = [item.replace("\n", "").split(';') for item in row]
-            return stories
+            table = [item.replace("\n", "").split(';') for item in row]
+            return table
     except FileNotFoundError:
-        stories = None
+        table = None
 
 
-def write_to_file(stories, filename="database.csv"):
+def write_to_file(table, answers=False):
     """
         Saves data to the specified file.
-        Write the entries as rows.
+        Write the data as rows.
     """
-    with open(filename, 'w') as workfile:
+    with open(answers, 'w') as workfile:
         for item in stories:
             story = [element.strip("\n") for element in item]
             row = ';'.join(story)
