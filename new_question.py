@@ -1,7 +1,9 @@
 from flask import Flask
 from flask import render_template
 from flask import Request
+import time
 
+timestamp = int(time.time())
 
 app = Flask(__name__)
 
@@ -12,14 +14,15 @@ def new_question():
     Add the new question to question.csv,
     and return to the home page.
     """
-    datas = openfile()
+    datas = open_question_file()
     new_list = []
     new_list.append(0, ID_generator(datas))
-    question_attributes = ['id', 'submisson_time', 'title', 'message']
+    new_list.append(1, timestamp)
+    question_attributes = ['title', 'message']
     for element in question_attributes:
         new_list.append(element)
     datas.append(new_list)
-    write_to_file(datas)
+    write_question_file(datas)
     return render_template("home.html")
 
 if __name__ == '__main__':
