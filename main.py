@@ -11,9 +11,17 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
+    table_headers = [
+                    "#ID",
+                    "Submission time",
+                    "View number",
+                    "Vote number",
+                    "Title",
+                    "Message"
+                    ]
     list_of_questions = open_question_file()
     list_of_questions = data_sorting(list_of_questions, True)
-    return render_template('home.html', list_of_questions=list_of_questions)
+    return render_template('home.html', table_headers=table_headers, list_of_questions=list_of_questions)
 
 
 @app.route('/question/new', methods=['GET'])

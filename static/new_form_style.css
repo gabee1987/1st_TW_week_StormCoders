@@ -94,6 +94,15 @@ h1{
     border: 3px solid #4E5066;
 }
 
+#home {
+    position:absolute;
+    transition: .5s ease;
+    left: 20px;
+    top: 20px;
+
+}
+
+
 
 /***
 div.story_edit_title {

@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 
     <html>
+        <link rel="stylesheet" href="/static/home_style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <head>
             <title>Ask Mate v1.0-Alpha</title>
         </head>
         <body>
-            <h1>Question list</h1>
+            <div align="middle" class="table-title">
+                <h1 align="middle">Question list</h1>
+            </div>
             <form action="/question/new" method="GET">
                 <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/question/new">
             </form>
-            <table border="1">
+            <table>
                 <tr>
                     {% for item in table_headers %}
-                        <td>{{ item }}</td>
+                        <th class="text-left">{{ item }}</th>
                     {% endfor %}
                 </tr>
                 {% for row in list_of_questions %}
