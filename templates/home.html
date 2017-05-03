@@ -6,8 +6,8 @@
         </head>
         <body>
             <h1>Question list</h1>
-            <form action="/new_question" method="GET">
-                <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/new_question">
+            <form action="/question/new" method="GET">
+                <input id="ask_new_question" type="submit" value="Ask New Question" class="button" href="/question/new">
             </form>
             <table border="1">
                 <tr>
@@ -15,23 +15,13 @@
                         <td>{{ item }}</td>
                     {% endfor %}
                 </tr>
-                {% for row in questions %}
+                {% for row in list_of_questions %}
                     <tr>
                         {% for question in row %}
                             <td>{{ question }}</td>
                         {% endfor %}
-                            <td align="middle">
-                                <form action="/question/{{ row[0] }}" method="POST">
-                                    <input id="edit_button" name="edit_button" type="image" alt="submit" value="{{ row[0] }}" width="30" src="/static/edit.png">
-                                </form>
-                            </td>
-                            <td align="middle">
-                                <form action="/question_delete" method="POST">
-                                    <input id="delete_button" name="delete_button" type="image" alt="submit" value="{{ row[0] }}" width="30" src="/static/delete.png">
-                                </form>
-                            </td>
+                    </tr>        
                 {% endfor %}
-                    </tr>
             </table>
         </body>
     </html>

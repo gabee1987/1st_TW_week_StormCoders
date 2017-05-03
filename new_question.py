@@ -1,30 +1,20 @@
-from flask import Flask
-from flask import render_template
-from flask import Request
-import time
-from common import ID_generator, write_question_to_file
-
-timestamp = int(time.time())
-
-app = Flask(__name__)
+from common import *
 
 
-@app.route('/question/new', methods=['POST'])
-def new_question():
+def add_new_question(data, request):
     """
-    Add the new question to question.csv,
-    and return to the home page.
+    Add the new question to database.
     """
-    datas = open_question_file()
-    new_list = []
-    new_list.append(ID_generator(datas))
-    new_list.append(timestamp)
-    question_attributes = ['title', 'message']
-    for element in question_attributes:
-        new_list.append(request.form[element])
-    datas.append(new_list)
-    write_question_to_file(datas)
-    return render_template("home.html")
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    max_id = 0
+    if len(data) > 0:
+        max_id = max(int(i[0]) for i in data)
+    data.append([
+                str(max_id+1),
+                time_stamp_encode(),
+                '0',
+                '0',
+                request['question_title'],
+                request['question_message'],
+                ''
+                ])
+    return data

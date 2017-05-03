@@ -6,26 +6,44 @@
 
 import csv
 import random
-import constants
 import base64
+import uuid
+import datetime
+import time
+from constants import (QUESTIONS_FILE, ANSWERS_FILE)
 
 
-def ID_generator(data):
-    """
-        Generates an ID for the questions and answers.
-        The ID is unique in the database.
-    """
-    generated = data['id']
-    id_numbers = [
-        "0123456789"
-    ]
-    while generated in [x['id'] for x in data]:
-        generated = ""
-        for z in id_numbers:
-            generated += "".join([random.choice(z) for _ in range(4)])
-    generated = list(generated)
-    random.shuffle(generated)
-    return "".join(generated)
+"""def ID_generator(data):
+
+        Generates an ID for the questions and answers with uuid module.
+
+    generated_id = uuid.uuid4()
+    return str(generated_id)
+"""
+
+
+def base64_decoder(data):
+    for row in data:
+            row[4] = base64.b64decode(row[4]).decode()
+            row[5] = base64.b64decode(row[5]).decode()
+    return data
+
+
+def base64_encoder(data):
+    for row in data:
+            row[4] = base64.b64encode(bytearray(row[4], encoding='utf-8')).decode()
+            row[5] = base64.b64encode(bytearray(row[5], encoding='utf-8')).decode()
+    return data
+
+
+def time_stamp_decode(data):
+    for row in data:
+        row[1] = str(datetime.datetime.fromtimestamp(float(row[1])).strftime('%Y-%m-%d %H:%M:%S'))
+    return data
+
+
+def time_stamp_encode():
+    return str(time.time())
 
 
 def open_question_file():
@@ -33,19 +51,12 @@ def open_question_file():
         Opens the question.csv file,
         reads it content as rows.
     """
-    filepath = QUESTION_FILE
-    fields = QUESTION_FIELDS
-    decode = ENCODE_QUESTION_FIELDS
-
-    data = dict()
+    filepath = QUESTIONS_FILE
     with open(filepath) as workfile:
-        reader = csv.DictReader(filepath, fieldnames=fields, delimiter(','))
-        for dictionary in reader:
-            dictionary['id'] = int(dictionary['id'])
-            for field in decode:
-                base64_decoded = base64.b64decode(dictionary[field])
-                byte_like_decoded = base64_decoded.decode('utf_8')
-            data.update(dictionary)
+        row = workfile.readlines()
+        data = [item.replace('\n', '').split(';') for item in row]
+        data = base64_decoder(data)
+        data = time_stamp_decode(data)
         return data
 
 
@@ -55,53 +66,42 @@ def open_answer_file():
         reads it content as rows.
     """
     filepath = ANSWERS_FILE
-    fields = ANSWER_FIELDS
-    decode = ENCODE_ANSWER_FIELDS
-
-    data = dict()
     with open(filepath) as workfile:
-        reader = csv.DictReader(filepath, fieldnames=fields, delimiter(','))
-        for dictionary in reader:
-            dictionary['id'] = int(dictionary['id'])
-            for field in decode:
-                base64_decoded = base64.b64decode(dictionary[field])
-                byte_like_decoded = base64_decoded.decode('utf_8')
-            data.update(dictionary)
+        row = workfile.readlines()
+        data = [item.replace('\n', '').split(';') for item in row]
+        data = base64_decoder(data)
         return data
 
 
-def write_question_to_file(data, filepath):
+def write_question_to_file(data):
     """
         Saves question to the specified file.
         Write the data as rows.
     """
-    filepath = QUESTION_FILE
-    fields = QUESTION_FIELDS
-    encode = ENCODE_QUESTION_FIELDS
-
+    filepath = QUESTIONS_FILE
+    data = base64_encoder(data)
     with open(filepath, 'w') as workfile:
-        writer = csv.DictWriter(filepath, fieldnames=fields, delimiter=',')
-        for dictionary in data:
-            for field in encode:
-                byte_like_encoded = data[dictionary][field].encode('utf_8')
-                base64_encoded = base64.b64encode(byte_like_encoded)
-            writer.writerow(data[dictionary])
+        for item in data:
+            row = ';'.join(item)
+            workfile.write(row + '\n')
 
 
-def write_answer_to_file(data, filepath):
+def write_answer_to_file(data):
     """
         Saves answer to the specified file.
         Write the data as rows.
     """
     filepath = ANSWERS_FILE
-    fields = ANSWER_FIELDS
-    encode = ENCODE_ANSWER_FIELDS
-
+    data = base64_encoder(data)
     with open(filepath, 'w') as workfile:
-        writer = csv.DictWriter(filepath, fieldnames=fields, delimiter=',')
-        for dictionary in data:
-            for field in encode:
-                byte_like_encoded = data[dictionary][field].encode('utf_8')
-                base64_encoded = base64.b64encode(byte_like_encoded)
-            writer.writerow(data[dictionary])
+        for item in data:
+            row = ';'.join(item)
+            workfile.write(row + '\n')
+
+
+def data_sorting(data, rev_opt):
+    data = sorted(data, key=lambda data: data[1], reverse=rev_opt)
+    return data
+
+
 

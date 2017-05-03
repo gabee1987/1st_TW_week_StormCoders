@@ -9,15 +9,16 @@ app = Flask(__name__)
 '''
 
 
-@app.route("/", methods=["POST", "GET"])
+@app.route("/", methods=["GET"])
 def home_list_handler():
-    questions = open_file()
+    questions = open_question_file()
     table_headers = [
                     "#ID",
-                    "Question title",
                     "Submission time",
-                    "Edit",
-                    "Delete"
+                    "View number"
+                    "Vote number"
+                    "Title",
+                    "Message"
                     ]
     return render_template("home.html", questions=questions, table_headers=table_headers)
 
