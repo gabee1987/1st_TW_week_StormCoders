@@ -31,7 +31,7 @@ def open_question_file():
 
     data = dict()
     with open(filepath) as workfile:
-        reader = csv.DictReader(filepath, fieldnames=QUESTION_FIELDS, delimiter(','))
+        reader = csv.DictReader(filepath, fieldnames=fields, delimiter(','))
         for row in reader:
                 row['id'] = int(row['id'])
                 for field in decode:
@@ -55,10 +55,10 @@ def open_answer_file():
                 row['id'] = int(row['id'])
                 for field in decode:
                     row[field] = base64.b64decode(row[field]).decode()
-        return table
+        return data
 
 
-def write_question_to_file(table, filepath):
+def write_question_to_file(data, filepath):
     """
         Saves question to the specified file.
         Write the data as rows.
@@ -75,7 +75,7 @@ def write_question_to_file(table, filepath):
             writer.writerow(data[row])
 
 
-def write_answer_to_file(table, filepath):
+def write_answer_to_file(data, filepath):
     """
         Saves answer to the specified file.
         Write the data as rows.
