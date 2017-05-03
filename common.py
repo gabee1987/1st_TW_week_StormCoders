@@ -19,7 +19,6 @@ def ID_generator():
     generated_a_ids = []
 
 
-
 def open_question_file():
     """
         Opens the question.csv file,
@@ -35,7 +34,8 @@ def open_question_file():
         for row in reader:
                 row['id'] = int(row['id'])
                 for field in decode:
-                    row[field] = base64.b64decode(row[field]).decode()
+                    base64_decoded = base64.b64decode(row[field])
+                    byte_like_decoded = base64_decoded.decode('utf_8')
         return data
 
 
@@ -54,7 +54,8 @@ def open_answer_file():
         for row in reader:
                 row['id'] = int(row['id'])
                 for field in decode:
-                    row[field] = base64.b64decode(row[field]).decode()
+                    base64_decoded = base64.b64decode(row[field])
+                    byte_like_decoded = base64_decoded.decode('utf_8')
         return data
 
 
@@ -71,7 +72,8 @@ def write_question_to_file(data, filepath):
         writer = csv.DictWriter(filepath, fieldnames=fields, delimiter=',')
         for row in data:
             for field in encode:
-                data[row][field] = base64.b64encode(bytearray(data[row][field], encoding='utf-8')).decode()
+                byte_like_encoded = data[row][field].encode('utf_8')
+                base64_encoded = base64.b64encode(byte_like_encoded)
             writer.writerow(data[row])
 
 
@@ -88,6 +90,7 @@ def write_answer_to_file(data, filepath):
         writer = csv.DictWriter(filepath, fieldnames=fields, delimiter=',')
         for row in data:
             for field in encode:
-                data[row][field] = base64.b64encode(bytearray(data[row][field], encoding='utf-8')).decode()
+                byte_like_encoded = data[row][field].encode('utf_8')
+                base64_encoded = base64.b64encode(byte_like_encoded)
             writer.writerow(data[row])
 
