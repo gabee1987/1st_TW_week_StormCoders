@@ -21,7 +21,7 @@ def new_question():
     new_list.append(timestamp)
     question_attributes = ['title', 'message']
     for element in question_attributes:
-        new_list.append(element)
+        new_list.append(request.form[element])
     datas.append(new_list)
     write_question_to_file(datas)
     return render_template("home.html")

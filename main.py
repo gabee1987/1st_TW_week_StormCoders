@@ -3,6 +3,8 @@ AskMate Q&A website
 by StormCoders
 """
 from flask import Flask, request, url_for, redirect
+from common import *
+from new_question import new_question
 
 app = Flask(__name__)
 
