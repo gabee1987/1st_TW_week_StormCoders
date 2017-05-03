@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template
 from flask import Request
 import time
+from common import ID_generator, write_question_to_file
 
 timestamp = int(time.time())
 
@@ -16,13 +17,13 @@ def new_question():
     """
     datas = open_question_file()
     new_list = []
-    new_list.append(0, ID_generator(datas))
-    new_list.append(1, timestamp)
+    new_list.append(ID_generator(datas))
+    new_list.append(timestamp)
     question_attributes = ['title', 'message']
     for element in question_attributes:
         new_list.append(element)
     datas.append(new_list)
-    write_question_file(datas)
+    write_question_to_file(datas)
     return render_template("home.html")
 
 if __name__ == '__main__':
