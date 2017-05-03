@@ -10,13 +10,22 @@ import constants
 import base64
 
 
-def ID_generator():
+def ID_generator(data):
     """
         Generates an ID for the questions and answers.
         The ID is unique in the database.
     """
-    generated_q_ids = []
-    generated_a_ids = []
+    generated = data['id']
+    id_numbers = [
+        "0123456789"
+    ]
+    while generated in [x['id'] for x in data]:
+        generated = ""
+        for z in id_numbers:
+            generated += "".join([random.choice(z) for _ in range(4)])
+    generated = list(generated)
+    random.shuffle(generated)
+    return "".join(generated)
 
 
 
