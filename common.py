@@ -7,6 +7,7 @@
 import csv
 import random
 import constants
+import base64
 
 
 def ID_generator():
@@ -19,36 +20,41 @@ def ID_generator():
 
 
 
-def open_question_file(filepath):
+def open_question_file():
     """
         Opens the question.csv file,
         reads it content as rows.
     """
     filepath = QUESTION_FILE
+    fields = QUESTION_FIELDS
     decode = ENCODE_QUESTION_FIELDS
 
-    with open(filepath, 'r') as workfile:
+    data = dict()
+    with open(filepath) as workfile:
         reader = csv.DictReader(filepath, fieldnames=QUESTION_FIELDS, delimiter(','))
-        row["0"] = int(row["0"])
-        for field in decode:
-            row[4][5] = base64.b64decode(row[field]).decode()
-        table = [item.strip("\n").split(';') for item in row]
-        return table
+        for row in reader:
+                row['id'] = int(row['id'])
+                for field in decode:
+                    row[field] = base64.b64decode(row[field]).decode()
+        return data
 
 
-def open_answer_file(filepath):
+def open_answer_file():
     """
         Opens the answer.csv file,
         reads it content as rows.
     """
     filepath = ANSWERS_FILE
+    fields = ANSWER_FIELDS
     decode = ENCODE_ANSWER_FIELDS
 
-    with open(filepath, 'r') as workfile:
-        row = workfile.readlines()
-        row["0"] = int(row["0"])
-        row[4:5] = base64.b64decode(row[field]).decode()
-        table = [item.strip("\n").split(';') for item in row]
+    data = dict()
+    with open(filepath) as workfile:
+        reader = csv.DictReader(filepath, fieldnames=fields, delimiter(','))
+        for row in reader:
+                row['id'] = int(row['id'])
+                for field in decode:
+                    row[field] = base64.b64decode(row[field]).decode()
         return table
 
 
@@ -58,12 +64,15 @@ def write_question_to_file(table, filepath):
         Write the data as rows.
     """
     filepath = QUESTION_FILE
+    fields = QUESTION_FIELDS
+    encode = ENCODE_QUESTION_FIELDS
 
-    with open(answers, 'w') as workfile:
-        for item in table:
-            story = [element.strip("\n") for element in item]
-            row = ';'.join(story)
-            workfile.write(row + "\n")
+    with open(filepath, 'w') as workfile:
+        writer = csv.DictWriter(filepath, fieldnames=fields, delimiter=',')
+        for row in data:
+            for field in encode:
+                data[row][field] = base64.b64encode(bytearray(data[row][field], encoding='utf-8')).decode()
+            writer.writerow(data[row])
 
 
 def write_answer_to_file(table, filepath):
@@ -71,11 +80,14 @@ def write_answer_to_file(table, filepath):
         Saves answer to the specified file.
         Write the data as rows.
     """
-    filepath = ANSWER_FILE
+    filepath = ANSWERS_FILE
+    fields = ANSWER_FIELDS
+    encode = ENCODE_ANSWER_FIELDS
 
-    with open(answers, 'w') as workfile:
-        for item in table:
-            story = [element.strip("\n") for element in item]
-            row = ';'.join(story)
-            workfile.write(row + "\n")
+    with open(filepath, 'w') as workfile:
+        writer = csv.DictWriter(filepath, fieldnames=fields, delimiter=',')
+        for row in data:
+            for field in encode:
+                data[row][field] = base64.b64encode(bytearray(data[row][field], encoding='utf-8')).decode()
+            writer.writerow(data[row])
 
