@@ -40,11 +40,12 @@ def open_question_file():
     data = dict()
     with open(filepath) as workfile:
         reader = csv.DictReader(filepath, fieldnames=fields, delimiter(','))
-        for row in reader:
-                row['id'] = int(row['id'])
-                for field in decode:
-                    base64_decoded = base64.b64decode(row[field])
-                    byte_like_decoded = base64_decoded.decode('utf_8')
+        for dictionary in reader:
+            dictionary['id'] = int(dictionary['id'])
+            for field in decode:
+                base64_decoded = base64.b64decode(dictionary[field])
+                byte_like_decoded = base64_decoded.decode('utf_8')
+            data.update(dictionary)
         return data
 
 
@@ -60,11 +61,12 @@ def open_answer_file():
     data = dict()
     with open(filepath) as workfile:
         reader = csv.DictReader(filepath, fieldnames=fields, delimiter(','))
-        for row in reader:
-                row['id'] = int(row['id'])
-                for field in decode:
-                    base64_decoded = base64.b64decode(row[field])
-                    byte_like_decoded = base64_decoded.decode('utf_8')
+        for dictionary in reader:
+            dictionary['id'] = int(dictionary['id'])
+            for field in decode:
+                base64_decoded = base64.b64decode(dictionary[field])
+                byte_like_decoded = base64_decoded.decode('utf_8')
+            data.update(dictionary)
         return data
 
 
@@ -79,11 +81,11 @@ def write_question_to_file(data, filepath):
 
     with open(filepath, 'w') as workfile:
         writer = csv.DictWriter(filepath, fieldnames=fields, delimiter=',')
-        for row in data:
+        for dictionary in data:
             for field in encode:
-                byte_like_encoded = data[row][field].encode('utf_8')
+                byte_like_encoded = data[dictionary][field].encode('utf_8')
                 base64_encoded = base64.b64encode(byte_like_encoded)
-            writer.writerow(data[row])
+            writer.writerow(data[dictionary])
 
 
 def write_answer_to_file(data, filepath):
@@ -97,9 +99,9 @@ def write_answer_to_file(data, filepath):
 
     with open(filepath, 'w') as workfile:
         writer = csv.DictWriter(filepath, fieldnames=fields, delimiter=',')
-        for row in data:
+        for dictionary in data:
             for field in encode:
-                byte_like_encoded = data[row][field].encode('utf_8')
+                byte_like_encoded = data[dictionary][field].encode('utf_8')
                 base64_encoded = base64.b64encode(byte_like_encoded)
-            writer.writerow(data[row])
+            writer.writerow(data[dictionary])
 
