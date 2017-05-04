@@ -2,7 +2,7 @@
 AskMate Q&A website
 by StormCoders
 """
-from flask import Flask, request, url_for, redirect, render_template
+from flask import Flask, request, redirect, render_template
 from common import *
 
 app = Flask(__name__)
@@ -48,15 +48,16 @@ def add_new_question():
     return redirect('/')
 
 
-@app.route('/question/<q_id>', methods='[GET]')
+@app.route('/question/<q_id>', methods=['GET', 'POST'])
 def display_question(q_id=None):
     list_of_questions = open_question_file()
     q_id = request.form["view_button"]
     current_question = []
-    for question in list_of_questions:
-        if question[0] == q_id:
-            for item in question:
-                current_question.append(item[4][5])
+    for row in list_of_questions:
+        if row[0] == q_id:
+            current_question.append(row[0])
+            current_question.append(row[4])
+            current_question.append(row[5])
     return render_template('question.html', q_id=q_id, current_question=current_question)
 
 
