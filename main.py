@@ -48,10 +48,16 @@ def add_new_question():
     return redirect('/')
 
 
-@app.route("/question/<q_id>")
-def display_question(q_id=0):
-    data = 
-    return "Display question with id"
+@app.route("/question/<q_id>", methods='[GET]')
+def display_question(q_id=None):
+    list_of_questions = open_question_file()
+    q_id = request.form["view_button"]
+    current_question = []
+    for question in list_of_questions:
+        if question[0] == q_id:
+            for item in question:
+                current_question.append(item)
+    return render_template('question.html', q_id=q_id, current_question=current_question)
 
 
 @app.route('/question/<q_id>/new-answer', methods=['GET', 'POST'])
