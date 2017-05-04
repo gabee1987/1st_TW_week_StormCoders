@@ -33,8 +33,10 @@ def time_stamp_decode(data):
     return data
 
 
-def time_stamp_encode():
-    return str(int(time.time()))
+def time_stamp_encode(data):
+    for row in data:
+        row[1] = str(int(datetime.datetime.strptime(row[1], '%Y-%m-%d %H:%M:%S').strftime("%s")))
+        return data
 
 
 def open_question_file():
@@ -71,7 +73,8 @@ def write_question_to_file(data):
     """
     filepath = QUESTIONS_FILE
     data = base64_encoder(data)
-    with open(filepath, 'a') as workfile:
+    data = time_stamp_encode(data)
+    with open(filepath, 'w') as workfile:
         for item in data:
             row = ';'.join(item)
             workfile.write(row + '\n')

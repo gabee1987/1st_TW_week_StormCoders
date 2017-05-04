@@ -4,7 +4,6 @@ by StormCoders
 """
 from flask import Flask, request, url_for, redirect, render_template
 from common import *
-from new_question import add_new_question
 
 app = Flask(__name__)
 
@@ -37,7 +36,7 @@ def add_new_question():
         max_id = max(int(i[0]) for i in data)
     data.append([
                 str(max_id+1),
-                time_stamp_encode(),
+                str(int(time.time())),
                 '0',
                 '0',
                 request.form['question_title'],
@@ -64,6 +63,6 @@ def page_not_found(error):
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
 
 

@@ -1,10 +1,10 @@
 from common import *
 
 
-def add_new_question(data, request):
-    """
+"""def add_new_question(data, request):
+    
     Add the new question to database.
-    """
+    
     max_id = 0
     if len(data) > 0:
         max_id = max(int(i[0]) for i in data)
@@ -18,3 +18,4 @@ def add_new_question(data, request):
                 ''
                 ])
     return data
+"""
