@@ -1,7 +1,7 @@
-"""
+'''
     Frequently used functions for the AskMate project.
     by StormCoders
-"""
+'''
 
 
 import csv
@@ -46,10 +46,10 @@ def time_stamp_encode(data):
 
 
 def open_question_file():
-    """
+    '''
         Opens the question.csv file,
         reads it content as rows.
-    """
+    '''
     filepath = QUESTIONS_FILE
     try:
         with open(filepath) as workfile:
@@ -63,10 +63,10 @@ def open_question_file():
 
 
 def open_answer_file():
-    """
+    '''
         Opens the answer.csv file,
         reads it content as rows.
-    """
+    '''
     filepath = ANSWERS_FILE
     try:
         with open(filepath) as workfile:
@@ -80,10 +80,10 @@ def open_answer_file():
 
 
 def write_question_to_file(data):
-    """
+    '''
         Saves question to the specified file.
         Write the data as rows.
-    """
+    '''
     filepath = QUESTIONS_FILE
     data = base64_encoder(data)
     data = time_stamp_encode(data)
@@ -94,10 +94,10 @@ def write_question_to_file(data):
 
 
 def write_answer_to_file(data):
-    """
+    '''
         Saves answer to the specified file.
         Write the data as rows.
-    """
+    '''
     filepath = ANSWERS_FILE
     data = base64_encoder(data)
     data = time_stamp_encode(data)
