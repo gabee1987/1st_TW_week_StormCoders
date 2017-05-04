@@ -13,6 +13,9 @@
             <h1 align="left">{{ current_question[1] }}</h1>
             <h2 align="left">{{ current_question[2] }}</h2>
         </div>
+        <form action="/question/<question_id>/new-answer" method="POST">
+            <input  id="edit_button" name="edit_button" type="image" src="/static/img/pen.png" alt="Submit" width="60" value="{{ row[0] }}">
+        </form>
     </body>
     </div>
 </html>
