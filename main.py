@@ -56,7 +56,7 @@ def display_question(q_id=None):
     for question in list_of_questions:
         if question[0] == q_id:
             for item in question:
-                current_question.append(item)
+                current_question.append(item[4][5])
     return render_template('question.html', q_id=q_id, current_question=current_question)
 
 
