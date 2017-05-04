@@ -48,7 +48,7 @@ def add_new_question():
     return redirect('/')
 
 
-@app.route("/question/<q_id>", methods='[GET]')
+@app.route('/question/<q_id>', methods='[GET]')
 def display_question(q_id=None):
     list_of_questions = open_question_file()
     q_id = request.form["view_button"]
