@@ -68,6 +68,17 @@ def display_question(q_id=None):
     return render_template('question.html', q_id=q_id, current_question=current_question, current_answers=current_answers)
 
 
+@app.route('//question/<question_id>/delete', methods=['POST'])
+def delete_question():
+    data = open_question_file()
+    q_id = request.form["delete_button"]
+    for row in data:
+        if row[0] == q_id:
+            data.remove(row)
+    write_question_to_file(data)
+    return redirect('/')
+
+
 @app.route('/question/<q_id>/new-answer', methods=['GET', 'POST'])
 def new_answer(q_id=0):
     return render_template('answer_form.html')
