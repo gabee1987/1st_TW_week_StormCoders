@@ -14,6 +14,9 @@ from constants import (QUESTIONS_FILE, ANSWERS_FILE)
 
 
 def base64_decoder(data):
+    '''
+        Decodes the base64 to readable string format.
+    '''
     try:
         for row in data:
             row[4] = base64.b64decode(row[4]).decode()
@@ -24,22 +27,31 @@ def base64_decoder(data):
 
 
 def base64_encoder(data):
+    '''
+        Encodes the string format to base64.
+    '''
     try:
         for row in data:
             row[4] = base64.b64encode(bytearray(row[4], encoding='utf-8')).decode()
             row[5] = base64.b64encode(bytearray(row[5], encoding='utf-8')).decode()
     except IndexError:
-            pass
+        pass
     return data
 
 
 def time_stamp_decode(data):
+    '''
+        Decodes the UNIX timestamp to readable string format.
+    '''
     for row in data:
-        row[1] = str(datetime.datetime.fromtimestamp(float(row[1])).strftime('%Y-%m-%d %H:%M:%S'))
+            row[1] = str(datetime.datetime.fromtimestamp(float(row[1])).strftime('%Y-%m-%d %H:%M:%S'))
     return data
 
 
 def time_stamp_encode(data):
+    '''
+        Encodes the string time format to UNIX timestamp.
+    '''
     for row in data:
         row[1] = str(int(datetime.datetime.strptime(row[1], '%Y-%m-%d %H:%M:%S').strftime("%s")))
     return data
@@ -108,6 +120,10 @@ def write_answer_to_file(data):
 
 
 def data_sorting(data, rev_opt):
+    '''
+        Sorts the questions by time in descanding order
+        Order can be reveresed with rev_opt.
+    '''
     data = sorted(data, key=lambda data: data[1], reverse=rev_opt)
     return data
 

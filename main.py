@@ -11,6 +11,9 @@ app.secret_key = 'Stormcoders AskMate website is awesome'
 
 @app.route('/', methods=['GET'])
 def index():
+    '''
+        Displays the question as a table.
+    '''
     table_headers = [
                     '#ID',
                     'Submission time',
@@ -30,11 +33,18 @@ def index():
 
 @app.route('/question/new', methods=['GET'])
 def new_question():
+    '''
+        Displays the question form page.
+    '''
     return render_template('question_form.html')
 
 
 @app.route('/new_question', methods=['POST'])
 def add_new_question():
+    '''
+        Adds a question to the database given by user.
+        Appends question elements as rows to the appropiate file.
+    '''
     data = open_question_file()
     max_id = 0
     if len(data) > 0:
@@ -55,6 +65,9 @@ def add_new_question():
 
 @app.route('/question/<q_id>', methods=['GET', 'POST'])
 def display_question(q_id=None):
+    '''
+        Displays the question from the list, selected by q_id.
+    '''
     list_of_questions = open_question_file()
     q_id = request.form['view_button']
     current_question = []
@@ -75,6 +88,10 @@ def display_question(q_id=None):
 
 @app.route('/question/<q_id>/delete', methods=['POST'])
 def delete_question(q_id=None):
+    '''
+        Deletes the appropiate question.
+        Removes a row from the file.
+    '''
     data = open_question_file()
     q_id = request.form['delete_button']
     for row in data:
@@ -86,6 +103,10 @@ def delete_question(q_id=None):
 
 @app.route('/question/<q_id>/vote-up', methods=['POST'])
 def vote_up_question(q_id=None):
+    '''
+        Takes a vote up in the appropiate question.
+        Adds 1 to the number in file.
+    '''
     data = open_question_file()
     q_id = request.form['vote_up_button']
     for row in data:
@@ -97,7 +118,11 @@ def vote_up_question(q_id=None):
 
 
 @app.route('/question/<q_id>/vote-down', methods=['POST'])
-def vote_down_question(q_id_=None):
+def vote_down_question(q_id=None):
+    '''
+        Takes a vote down in the appropiate question.
+        Substracs 1 from the number in file.
+    '''
     data = open_question_file()
     q_id = request.form['vote_down_button']
     for row in data:
