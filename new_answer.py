@@ -20,4 +20,4 @@ def add_new_answer(data, request, q_id=None):
                 request['answer_message']
                 ])
     write_answer_to_file(data)
-    return data
+    return render_template('/question/<q_id>')
