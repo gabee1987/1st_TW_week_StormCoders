@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html>
+    <link rel="stylesheet" href="/static/edit_style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <h1 align="middle">User Story Manager</h1> 
+    <div class="form-style-8">
+        <head>
+            <title>Sprinter 3000 - Add new Story</title>
+        </head>
+            <body>
+                <h2>Add New Story</h2>
+                <form action="/story" method="POST">
+                    <p>Your answer:</br>
+                    <textarea id="answer_msg" type="text" name="answer_msg" placeholder="Write your answer..." required></textarea></p>
+
+                    <input type="submit" name="back" value="Back" class="button">
+                    <input type="submit" name="create" value="Create" class="button">
+                </form>
+            </body>
+    </div>
+</html>

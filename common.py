@@ -13,26 +13,17 @@ import time
 from constants import (QUESTIONS_FILE, ANSWERS_FILE)
 
 
-"""def ID_generator(data):
-
-        Generates an ID for the questions and answers with uuid module.
-
-    generated_id = uuid.uuid4()
-    return str(generated_id)
-"""
-
-
 def base64_decoder(data):
     for row in data:
-            row[4] = base64.b64decode(row[4]).decode()
-            row[5] = base64.b64decode(row[5]).decode()
+        row[4] = base64.b64decode(row[4]).decode()
+        row[5] = base64.b64decode(row[5]).decode()
     return data
 
 
 def base64_encoder(data):
     for row in data:
-            row[4] = base64.b64encode(bytearray(row[4], encoding='utf-8')).decode()
-            row[5] = base64.b64encode(bytearray(row[5], encoding='utf-8')).decode()
+        row[4] = base64.b64encode(bytearray(row[4], encoding='utf-8')).decode()
+        row[5] = base64.b64encode(bytearray(row[5], encoding='utf-8')).decode()
     return data
 
 
@@ -43,7 +34,7 @@ def time_stamp_decode(data):
 
 
 def time_stamp_encode():
-    return str(time.time())
+    return str(int(time.time()))
 
 
 def open_question_file():
@@ -55,8 +46,8 @@ def open_question_file():
     with open(filepath) as workfile:
         row = workfile.readlines()
         data = [item.replace('\n', '').split(';') for item in row]
-        data = base64_decoder(data)
         data = time_stamp_decode(data)
+        data = base64_decoder(data)
         return data
 
 
@@ -80,7 +71,7 @@ def write_question_to_file(data):
     """
     filepath = QUESTIONS_FILE
     data = base64_encoder(data)
-    with open(filepath, 'w') as workfile:
+    with open(filepath, 'a') as workfile:
         for item in data:
             row = ';'.join(item)
             workfile.write(row + '\n')
