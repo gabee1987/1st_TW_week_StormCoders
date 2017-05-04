@@ -97,7 +97,7 @@ def vote_up_question(q_id=None):
 
 
 @app.route('/question/<q_id>/vote-down', methods=['POST'])
-def vote_down_question(q_id_None):
+def vote_down_question(q_id_=None):
     data = open_question_file()
     q_id = request.form['vote_down_button']
     for row in data:
