@@ -13,9 +13,9 @@
             <h1 align="left">{{ current_question[1] }}</h1>
             <h2 align="left">{{ current_question[2] }}</h2>
         </div>
-        <form action="/question/<question_id>/new-answer" method="POST">
-            <input  id="new_answer" name="new_answer" type="button"  alt="Submit" width="60" value="{{ current_question[0] }}">
-        </form>
+            <form action="/question/<question_id>/new-answer" method="POST">
+                <input  id="new_answer" name="new_answer" type="button"  alt="Submit" width="60" value="{{ current_question[0] }}">
+            </form>
     </body>
     </div>
 </html>

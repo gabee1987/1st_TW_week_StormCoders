@@ -55,9 +55,16 @@ def display_question(q_id=None):
     current_question = []
     for row in list_of_questions:
         if row[0] == q_id:
+            row[2] = str(int(row[2])+1)
             current_question.append(row[0])
             current_question.append(row[4])
             current_question.append(row[5])
+            write_question_to_file(list_of_questions)
+    answer_list = open_answer_file()
+    current_answers = []
+    for row in answer_list:
+        if row[3] == q_id:
+            current_answers.append(row)
     return render_template('question.html', q_id=q_id, current_question=current_question)
 
 

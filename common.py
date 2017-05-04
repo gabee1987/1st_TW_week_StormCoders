@@ -14,16 +14,22 @@ from constants import (QUESTIONS_FILE, ANSWERS_FILE)
 
 
 def base64_decoder(data):
-    for row in data:
-        row[4] = base64.b64decode(row[4]).decode()
-        row[5] = base64.b64decode(row[5]).decode()
+    try:
+        for row in data:
+            row[4] = base64.b64decode(row[4]).decode()
+            row[5] = base64.b64decode(row[5]).decode()
+    except IndexError:
+        pass
     return data
 
 
 def base64_encoder(data):
-    for row in data:
-        row[4] = base64.b64encode(bytearray(row[4], encoding='utf-8')).decode()
-        row[5] = base64.b64encode(bytearray(row[5], encoding='utf-8')).decode()
+    try:
+        for row in data:
+            row[4] = base64.b64encode(bytearray(row[4], encoding='utf-8')).decode()
+            row[5] = base64.b64encode(bytearray(row[5], encoding='utf-8')).decode()
+    except IndexError:
+            pass
     return data
 
 
@@ -45,12 +51,15 @@ def open_question_file():
         reads it content as rows.
     """
     filepath = QUESTIONS_FILE
-    with open(filepath) as workfile:
-        row = workfile.readlines()
-        data = [item.replace('\n', '').split(';') for item in row]
-        data = time_stamp_decode(data)
-        data = base64_decoder(data)
-        return data
+    try:
+        with open(filepath) as workfile:
+            row = workfile.readlines()
+            data = [item.replace('\n', '').split(';') for item in row]
+            data = time_stamp_decode(data)
+            data = base64_decoder(data)
+            return data
+    except FileNotFoundError:
+        data = []
 
 
 def open_answer_file():
@@ -59,11 +68,15 @@ def open_answer_file():
         reads it content as rows.
     """
     filepath = ANSWERS_FILE
-    with open(filepath) as workfile:
-        row = workfile.readlines()
-        data = [item.replace('\n', '').split(';') for item in row]
-        data = base64_decoder(data)
-        return data
+    try:
+        with open(filepath) as workfile:
+            row = workfile.readlines()
+            data = [item.replace('\n', '').split(';') for item in row]
+            data = time_stamp_decode(data)
+            data = base64_decoder(data)
+            return data
+    except FileNotFoundError:
+        data = []
 
 
 def write_question_to_file(data):
