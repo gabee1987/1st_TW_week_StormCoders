@@ -3,7 +3,6 @@
 <html>
     <link rel="stylesheet" href="/static/question_style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <div class="form-style-8">
     <head>
         <title> Question </title>
     </head>
@@ -11,8 +10,8 @@
         <form action="/">
             <button id="home" name="home_button" type="submit" action="/" class="button">HOME</button>
         </form>
-            <div class="table-title">
-            <table class="table-title">
+        <div class="table-title">
+            <table>
                 <thead>
                     <tr>
                         <th align="middle">{{ current_question[1] }}</th>
@@ -22,7 +21,7 @@
                     </tr>
                 </thead>
             </table>
-            </div>
+        </div>
             <table class="table-fill">
                 <tbody class="table-hover">
                     {% for row in current_answers %}
@@ -39,5 +38,4 @@
                 </form>
             </table>
     </body>
-    </div>
 </html>
