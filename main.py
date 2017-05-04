@@ -34,14 +34,15 @@ def add_new_question():
     max_id = 0
     if len(data) > 0:
         max_id = max(int(i[0]) for i in data)
+    current_time = str(int(time.time()))
+    decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
     data.append([
                 str(max_id+1),
-                str(int(time.time())),
+                decoded_time,
                 '0',
                 '0',
                 request.form['question_title'],
                 request.form['question_message'],
-                ''
                 ])
     write_question_to_file(data)
     return redirect('/')

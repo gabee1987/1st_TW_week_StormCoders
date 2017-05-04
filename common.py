@@ -36,7 +36,7 @@ def time_stamp_decode(data):
 def time_stamp_encode(data):
     for row in data:
         row[1] = str(int(datetime.datetime.strptime(row[1], '%Y-%m-%d %H:%M:%S').strftime("%s")))
-        return data
+    return data
 
 
 def open_question_file():
