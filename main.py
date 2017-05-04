@@ -50,6 +50,7 @@ def add_new_question():
 
 @app.route("/question/<q_id>")
 def display_question(q_id=0):
+    data = 
     return "Display question with id"
 
 
