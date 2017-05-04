@@ -23,13 +23,13 @@
             </table>
             <table class="table-fill">
                 <tbody class="table-hover">
+                    {% for row in current_answers %}
                     <tr>
-                        <td class="text-left">{{ current_answers[0] }}</td>
-                        <td class="text-left">{{ current_answers[1] }}</td>
-                        <td class="text-left">{{ current_answers[2] }}</td>
-                        <td class="text-left">{{ current_answers[3] }}</td>
-                        <td class="text-left">{{ current_answers[4] }}</td>
+                        {% for item in row %}
+                            <td class="text-left">{{ item }}</td>
+                        {% endfor %}
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
                 <form action="/question/<question_id>/new-answer" method="POST">

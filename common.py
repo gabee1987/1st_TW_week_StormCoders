@@ -15,27 +15,39 @@ from constants import (QUESTIONS_FILE, ANSWERS_FILE)
 
 def base64_decoder(data):
     '''
-        Decodes the base64 to readable string format.
+        Decodes the base64 question fields to readable string format.
     '''
-    try:
-        for row in data:
-            row[4] = base64.b64decode(row[4]).decode()
-            row[5] = base64.b64decode(row[5]).decode()
-    except IndexError:
-        pass
+    for row in data:
+        row[4] = base64.b64decode(row[4]).decode()
+        row[5] = base64.b64decode(row[5]).decode()
+    return data
+
+
+def base64_decoder_ans(data):
+    '''
+        Decodes the base64 answer fields to readable string format.
+    '''
+    for row in data:
+        row[4] = base64.b64decode(row[4]).decode()
     return data
 
 
 def base64_encoder(data):
     '''
-        Encodes the string format to base64.
+        Encodes the question string format to base64.
     '''
-    try:
-        for row in data:
-            row[4] = base64.b64encode(bytearray(row[4], encoding='utf-8')).decode()
-            row[5] = base64.b64encode(bytearray(row[5], encoding='utf-8')).decode()
-    except IndexError:
-        pass
+    for row in data:
+        row[4] = base64.b64encode(bytearray(row[4], encoding='utf-8')).decode()
+        row[5] = base64.b64encode(bytearray(row[5], encoding='utf-8')).decode()
+    return data
+
+
+def base64_encoder_ans(data):
+    '''
+        Encodes the answer string format to base64.
+    '''
+    for row in data:
+        row[4] = base64.b64encode(bytearray(row[4], encoding='utf-8')).decode()
     return data
 
 
@@ -63,15 +75,12 @@ def open_question_file():
         reads it content as rows.
     '''
     filepath = QUESTIONS_FILE
-    try:
-        with open(filepath) as workfile:
+    with open(filepath) as workfile:
             row = workfile.readlines()
             data = [item.replace('\n', '').split(';') for item in row]
             data = time_stamp_decode(data)
             data = base64_decoder(data)
             return data
-    except FileNotFoundError:
-        data = []
 
 
 def open_answer_file():
@@ -80,15 +89,12 @@ def open_answer_file():
         reads it content as rows.
     '''
     filepath = ANSWERS_FILE
-    try:
-        with open(filepath) as workfile:
-            row = workfile.readlines()
-            data = [item.replace('\n', '').split(';') for item in row]
-            data = time_stamp_decode(data)
-            data = base64_decoder(data)
-            return data
-    except FileNotFoundError:
-        data = []
+    with open(filepath) as workfile:
+        row = workfile.readlines()
+        data = [item.replace('\n', '').split(';') for item in row]
+        data = time_stamp_decode(data)
+        data = base64_decoder_ans(data)
+        return data
 
 
 def write_question_to_file(data):
@@ -111,7 +117,7 @@ def write_answer_to_file(data):
         Write the data as rows.
     '''
     filepath = ANSWERS_FILE
-    data = base64_encoder(data)
+    data = base64_encoder_ans(data)
     data = time_stamp_encode(data)
     with open(filepath, 'w') as workfile:
         for item in data:
