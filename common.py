@@ -87,6 +87,7 @@ def write_answer_to_file(data):
     """
     filepath = ANSWERS_FILE
     data = base64_encoder(data)
+    data = time_stamp_encode(data)
     with open(filepath, 'w') as workfile:
         for item in data:
             row = ';'.join(item)
