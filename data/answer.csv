@@ -1,6 +1,6 @@
-1;1493914793;7;4;SG93IHRvIHVzZSBjb21tZW50cyBpbiBQeXRob24/;When working with any programming language, you include comments in the code to notate your work. 
-2;1493914876;6;18;Q29udmVydCBzdHJpbmcgZGF0ZSB0byB0aW1lc3RhbXAgaW4gUHl0aG9u;How to convert a string in the format "%d/%m/%Y" to timestamp?
-3;1493914973;9;8;SG93IHRvIGVuY29kZSB0ZXh0IHRvIGJhc2U2NCBpbiBweXRob24/;How do I go about doing this ? ( using Python 3.4)
-4;1493915044;20;8;UHl0aG9uOiBGaW5kIGluIGxpc3Q=;is it the most 'pythonic' way of finding an item in a list: if x in l:?
-5;1493918560;8;3;SG93IGNhbiBJIGdldCBkaWN0aW9uYXJ5IGtleSBhcyB2YXJpYWJsZSBkaXJlY3RseSBpbiBQeXRob24gKG5vdCBieSBzZWFyY2hpbmcgZnJvbSB2YWx1ZSk/;Sorry for this basic question but my searches on this are not turning up anything other than how to get a dictionary's key based on its value which I would prefer not to use as I simply want the text/name of the key and am worried that searching by value may end up returning 2 or more keys if the dictionary has a lot of entries... what I am trying to do is this:
-6;1493919110;1;0;UHl0aG9uIHN0cmluZyBmb3JtYXR0aW5nOiAlIHZzLiAuZm9ybWF0;Python 2.6 introduced the str.format() method with a slightly different syntax from the existing % operator. Which is better and for what situations?
+1;1493914793;1;1;c2V0IGlzIGEgYnVpbHRpbiAoYXMgeW91IGNhbiBzZWUgZnJvbSBTTydzIHN5bnRheCBoaWdobGlnaHRpbmcpLCBzbyBieSBnaXZpbmcgeW91ciB2YXJpYWJsZSB0aGF0IG5hbWUgeW91J3JlIHNoYWRvd2luZyB0aGUgYnVpbHRpbiBmb3Igbm8gcHVycG9zZSwgd2hpY2ggaXMgYXQgbGVhc3QgYmFkIHByYWN0aWNlLCBhbmQgbGlrZWx5IHRvIGNhdXNlIGlzc3VlcyBsYXRlciBpbiB0aGUgY29kZS4=
+2;1493914876;6;2;QmV0dGVyIHlldCwgdGhlIGNhbm9uaWNhbCB3YXkgdG8gd3JpdGUgdGhhdCBjb2RlIHNuaXBwZXQgaXM6
+3;1493914973;2;3;VGhhdCB3YXkgeW91IGRvbid0IGV2ZW4gaGF2ZSB0byBjaGVjayAnc2V0JyBhdCB0aGF0IHBvaW50Lg==
+4;1493915044;3;4;dHVybnMgb3V0IGVycm9yIHdhcyBjYXVzZWQgYnkgc29tZSAucHljIGZpbGVzIG5vdCB1cGRhdGluZy4=
+5;1493918560;4;5;RXhwbGFuYXRpb246IElmIHlvdSB3YW50IHRvIGluc3BlY3QgdGhlIGV4Y2VwdGlvbiB0aGF0IHdhcyB0aHJvd24sIHRoZSBzeW50YXggaXMgZXhjZXB0
+6;1493919110;5;6;SGVyZSdzIHdoYXQgaGFwcGVucyBpbiB0aGUgZmFpbGluZyBjb2RlOg==
