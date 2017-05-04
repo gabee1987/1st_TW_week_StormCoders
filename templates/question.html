@@ -33,9 +33,8 @@
                     {% endfor %}
                 </tbody>
             </table>
-                <form action="/question/<question_id>/new-answer" method="POST">
-                    <a  id="new_answer" name="new_answer" type="button" width="60" value="{{ current_question[0] }}"></a>
+                <form action="/question/{{ q_id }}/new-answer" method="POST">
+                    <input id="new_answer" name="new_answer" type="submit" class="button" width="60" value="{{ q_id }}">
                 </form>
-            </table>
     </body>
 </html>

@@ -133,9 +133,35 @@ def vote_down_question(q_id=None):
     return redirect('/')
 
 
-@app.route('/question/<q_id>/new-answer', methods=['GET', 'POST'])
-def new_answer(q_id=0):
-    return render_template('answer_form.html')
+@app.route('/question/<q_id>/new-answer', methods=['POST'])
+def display_answer(q_id=None):
+    '''
+        Displays the answer form page.
+    '''
+    question_id = q_id
+    return render_template('answer_form.html', question_id=question_id)
+
+
+@app.route('/question/new-answer', methods=['POST'])
+def add_new_answer():
+    """
+    Add the new answer to database.
+    """
+    data = open_answer_file()
+    max_id = 0
+    if len(data) > 0:
+        max_id = max(int(i[0]) for i in data)
+    current_time = str(int(time.time()))
+    decoded_time = str(datetime.datetime.fromtimestamp(float(current_time)).strftime('%Y-%m-%d %H:%M:%S'))
+    data.append([
+                str(max_id+1),
+                decoded_time,
+                '0',
+                request.form['question_id'],
+                request.form['answer_message']
+                ])
+    write_answer_to_file(data)
+    return redirect("/")
 
 
 @app.errorhandler(404)
@@ -145,5 +171,3 @@ def page_not_found(error):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
