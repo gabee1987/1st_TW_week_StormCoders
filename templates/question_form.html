@@ -8,7 +8,9 @@
         <title> New Question </title>
     </head>
     <body>
-        <input id="home" type="submit" value="Home" class="button" href="/">
+        <form action="/">
+            <button id="home" name="home_button" type="submit" action="/" class="button">HOME</button>
+        </form>
         <h2> Ask a new question! </h2>
         <form action="/new_question" method="POST">
             <p><h3> Give your question a title: </h3><br>

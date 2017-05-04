@@ -8,7 +8,9 @@
         <title> Question </title>
     </head>
     <body>
-        <input id="home" name="home_button" type="submit" value="HOME" class="button" href="/">
+        <form action="/">
+            <button id="home" name="home_button" type="submit" action="/" class="button">HOME</button>
+        </form>
             <table class="table-fill">
                 <thead>
                     <tr>
@@ -18,16 +20,22 @@
                         <th align="left">{{ current_question[2] }}</th>
                     </tr>
                 </thead>
+            </table>
+            <table class="table-fill">
                 <tbody class="table-hover">
                     <tr>
-                        {% for answer in current_answers %}
-                            <td class="text-left">{{ answer }}</td>
-                        {% endfor %}
+                        <td class="text-left">{{ current_answers[0] }}</td>
+                        <td class="text-left">{{ current_answers[1] }}</td>
+                        <td class="text-left">{{ current_answers[2] }}</td>
+                        <td class="text-left">{{ current_answers[3] }}</td>
+                        <td class="text-left">{{ current_answers[4] }}</td>
                     </tr>
                 </tbody>
+            </table>
                 <form action="/question/<question_id>/new-answer" method="POST">
-                <input  id="new_answer" name="new_answer" type="button"  alt="Submit" width="60" value="{{ current_question[0] }}">
-            </form>
+                    <a  id="new_answer" name="new_answer" type="button" width="60" value="{{ current_question[0] }}"></a>
+                </form>
+            </table>
     </body>
     </div>
 </html>
