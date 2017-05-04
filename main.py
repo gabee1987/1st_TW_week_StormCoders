@@ -65,7 +65,7 @@ def display_question(q_id=None):
     for row in answer_list:
         if row[3] == q_id:
             current_answers.append(row)
-    return render_template('question.html', q_id=q_id, current_question=current_question)
+    return render_template('question.html', q_id=q_id, current_question=current_question, current_answers=current_answers)
 
 
 @app.route('/question/<q_id>/new-answer', methods=['GET', 'POST'])

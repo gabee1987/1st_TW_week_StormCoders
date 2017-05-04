@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 
 <html>
-    <link rel="stylesheet" href="/question_style.css">
+    <link rel="stylesheet" href="/static/question_style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <div class="form-style-8">
     <head>
@@ -9,11 +9,21 @@
     </head>
     <body>
         <input id="home" name="home_button" type="submit" value="HOME" class="Button" href="/">
-        <div align="middle" class="table-title">
-            <h1 align="left">{{ current_question[1] }}</h1>
-            <h2 align="left">{{ current_question[2] }}</h2>
-        </div>
-            <form action="/question/<question_id>/new-answer" method="POST">
+            <table class="table-fill">
+                <thead>
+                    <tr>
+                        <th align="left">{{ current_question[1] }}</th>
+                        <th align="left">{{ current_question[2] }}</th>
+                    </tr>
+                </thead>
+                <tbody class="table-hover">
+                    <tr>
+                        {% for answer in current_answer %}
+                            <td class="text-left">{{ answer }}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+                <form action="/question/<question_id>/new-answer" method="POST">
                 <input  id="new_answer" name="new_answer" type="button"  alt="Submit" width="60" value="{{ current_question[0] }}">
             </form>
     </body>
