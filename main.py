@@ -16,7 +16,11 @@ def index():
                     "View number",
                     "Vote number",
                     "Title",
-                    "Message"
+                    "Message",
+                    "View",
+                    "Delete",
+                    "Vote Up",
+                    "Vote Down"
                     ]
     list_of_questions = open_question_file()
     list_of_questions = data_sorting(list_of_questions, True)
@@ -68,8 +72,8 @@ def display_question(q_id=None):
     return render_template('question.html', q_id=q_id, current_question=current_question, current_answers=current_answers)
 
 
-@app.route('//question/<question_id>/delete', methods=['POST'])
-def delete_question():
+@app.route('/question/<q_id>/delete', methods=['POST'])
+def delete_question(q_id=None):
     data = open_question_file()
     q_id = request.form["delete_button"]
     for row in data:
